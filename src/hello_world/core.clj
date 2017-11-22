@@ -5,7 +5,7 @@
 (defonce server (atom nil))
 
 (defn view [req]
-  (-> [:h1 "オッ!!!!!!!!!!!!!!!"]
+  (-> [:h1 [:Marquee {:behavior "alternate" :direction "up" :height "50"} "オッ!!!!!!!!!!!!!!!"]]
       hc/html))
 
 (defn app [req]
