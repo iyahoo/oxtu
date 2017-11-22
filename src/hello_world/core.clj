@@ -17,7 +17,7 @@
                        :or {host "localhost" port 3000 join? false}}]
   (let [port (if (string? port) (Integer/parseInt port) port)]
     (when-not @server
-      (reset! server (s/run-jetty #'app {:host host :port 3000 :join? join?})))))
+      (reset! server (s/run-jetty #'app {:host host :port port :join? join?})))))
 
 (defn stop-server []
   (when @server
