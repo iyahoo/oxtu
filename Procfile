@@ -1,0 +1,1 @@
+web: java $JVM_OPT -jar target/hello-world.jar host 0.0.0.0 port $PORT
