@@ -1,4 +1,4 @@
-(defproject hello-world "0.1.0-SNAPSHOT"
+(defproject oxtu "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
@@ -8,7 +8,7 @@
                  [ring/ring-core "1.6.3"]
                  [ring/ring-jetty-adapter "1.6.3"]
                  [hiccup "1.0.5"]]
-  :uberjar-name "hello-world.jar"
+  :uberjar-name "oxtu.jar"
   :profiles
   {:uberjar {:aot :all
-             :main hello-world.main}})
+             :main oxtu.main}})

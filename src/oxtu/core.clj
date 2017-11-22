@@ -1,4 +1,4 @@
-(ns hello-world.core
+(ns oxtu.core
   (:require [ring.adapter.jetty :as s]
             [hiccup.core :as hc]))
 
