@@ -7,7 +7,8 @@
   :dependencies [[org.clojure/clojure "1.9.0-RC1"]
                  [ring/ring-core "1.6.3"]
                  [ring/ring-jetty-adapter "1.6.3"]
-                 [hiccup "1.0.5"]]
+                 [hiccup "1.0.5"]
+                 [bidi "2.1.2"]]
   :uberjar-name "oxtu.jar"
   :profiles
   {:uberjar {:aot :all
