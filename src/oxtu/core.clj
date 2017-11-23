@@ -11,8 +11,8 @@
 
 (defonce oxtu "オッ!!!!!!!!!!!!")
 
-(defn handler-oxtu [hnum]
-  (let [htag (keyword hnum)]
+(defn handler-oxtu [htag]
+  (let [htag (keyword htag)]
     (as-> oxtu oxtu
       [:Marquee {:behavior "alternate" :direction "up" :height "50"} oxtu]
       [htag oxtu])))
@@ -27,14 +27,14 @@
   (-> (handler-oxtu "h1")
       struct-to-htmlres))
 
-(defn h-num-handler [{:keys [route-params]}]
+(defn h-tag-handler [{:keys [route-params]}]
   (-> (handler-oxtu (:tag route-params))
       struct-to-htmlres))
 
 (def handler
   (br/make-handler ["/" {"" index-handler
                          "index.html" index-handler
-                         [:tag "/"] h-num-handler}]))
+                         [:tag "/"] h-tag-handler}]))
 
 (def app
   (-> handler
