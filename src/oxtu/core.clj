@@ -34,6 +34,7 @@
 (def handler
   (br/make-handler ["/" {"" index-handler
                          "index.html" index-handler
+                         [:tag] h-tag-handler
                          [:tag "/"] h-tag-handler}]))
 
 (def app
