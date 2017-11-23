@@ -2,6 +2,10 @@
 
 https://oxtu.herokuapp.com/
 
+https://oxtu.herokuapp.com/h3/
+
+https://oxtu.herokuapp.com/i/
+
 ## License
 
 Copyright © 2017 iyahoo
