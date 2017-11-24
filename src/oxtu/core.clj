@@ -1,3 +1,4 @@
+;; -*- coding: utf-8 -*-
 (ns oxtu.core
   (:require [ring.middleware.session :as mids :refer [wrap-session]]
             [ring.middleware.flash :as midf :refer [wrap-flash]]
@@ -21,7 +22,8 @@
   (-> html
       hc/html
       res/response
-      (res/header "Content-Type" "text/html")))
+      (res/header "Content-Type" "text/html")
+      (res/charset "utf-8")))
 
 (defn index-handler [req]
   (-> (handler-oxtu "h1")
