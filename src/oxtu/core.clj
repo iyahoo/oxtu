@@ -5,39 +5,52 @@
             [ring.adapter.jetty :as s]
             [ring.util.response :as res]
             [hiccup.core :as hc]
-            [bidi.bidi :as bd]
             [bidi.ring :as br :refer [make-handler]]))
 
 (defonce server (atom nil))
 
 (defonce oxtu "オッ!!!!!!!!!!!!")
 
-(defn handler-oxtu [htag]
+(defonce form-html "resources/public/form.html")
+
+(defn oxtu-struct [htag]
   (let [htag (keyword htag)]
     (as-> oxtu oxtu
       [:Marquee {:behavior "alternate" :direction "up" :height "50"} oxtu]
       [htag oxtu])))
 
-(defn struct-to-htmlres [html]
-  (-> html
-      hc/html
+(defn make-response [strhtml]
+  (-> strhtml
       res/response
       (res/header "Content-Type" "text/html")
       (res/charset "utf-8")))
 
-(defn index-handler [req]
-  (-> (handler-oxtu "h1")
+(defn struct-to-htmlres [html]
+  (-> html
+      hc/html
+      make-response))
+
+(defn index [req]
+  (-> (oxtu-struct "h1")
       struct-to-htmlres))
 
-(defn h-tag-handler [{:keys [route-params]}]
-  (-> (handler-oxtu (:tag route-params))
+(defn h-tag [{:keys [route-params]}]
+  (-> (oxtu-struct (:tag route-params))
+      struct-to-htmlres))
+
+(defn form-struct []
+  [:script {:src "bundle.js" :type "text/javascript"}])
+
+(defn form [req]
+  (-> (form-struct)
       struct-to-htmlres))
 
 (def handler
-  (br/make-handler ["/" {"" index-handler
-                         "index.html" index-handler
-                         [:tag] h-tag-handler
-                         [:tag "/"] h-tag-handler}]))
+  (br/make-handler ["/" {"" index
+                         "index.html" index
+                         "form.html" form
+                         [:tag] h-tag
+                         [:tag "/"] h-tag}]))
 
 (def app
   (-> handler
@@ -59,5 +72,3 @@
   (when @server
     (stop-server)
     (start-server)))
-
-
