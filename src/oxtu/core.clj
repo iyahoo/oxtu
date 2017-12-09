@@ -2,6 +2,7 @@
 (ns oxtu.core
   (:require [ring.middleware.session :as mids :refer [wrap-session]]
             [ring.middleware.flash :as midf :refer [wrap-flash]]
+            [ring.middleware.resource :as midr]
             [ring.adapter.jetty :as s]
             [ring.util.response :as res]
             [hiccup.core :as hc]
@@ -39,7 +40,13 @@
       struct-to-htmlres))
 
 (defn form-struct []
-  [:script {:src "bundle.js" :type "text/javascript"}])
+  ;; reagentが描画するためのDOMが必要
+  [:html
+   [:head]
+   [:body
+    [:div
+     [:div {:id "app"}]
+     [:script {:src "bundle.js" :type "text/javascript"}]]]])
 
 (defn form [req]
   (-> (form-struct)
@@ -55,7 +62,9 @@
 (def app
   (-> handler
       mids/wrap-session
-      midf/wrap-flash))
+      midf/wrap-flash
+      (midr/wrap-resource "public")
+      ))
 
 (defn start-server [& {:keys [host port join?]
                        :or {host "localhost" port 3000 join? false}}]
