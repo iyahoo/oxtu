@@ -1,12 +1,12 @@
 ;; -*- coding: utf-8 -*-
 (ns oxtu.core
-  (:require [ring.middleware.session :as mids :refer [wrap-session]]
-            [ring.middleware.flash :as midf :refer [wrap-flash]]
-            [ring.middleware.resource :as midr]
-            [ring.adapter.jetty :as s]
+  (:require [ring.middleware.session :refer [wrap-session]]
+            [ring.middleware.flash :refer [wrap-flash]]
+            [ring.middleware.resource :refer [wrap-resource]]
+            [ring.adapter.jetty :refer [run-jetty]]
             [ring.util.response :as res]
-            [hiccup.core :as hc]
-            [bidi.ring :as br :refer [make-handler]]))
+            [hiccup.core :as hc :refer [html]]
+            [bidi.ring :refer [make-handler]]))
 
 (defonce server (atom nil))
 
