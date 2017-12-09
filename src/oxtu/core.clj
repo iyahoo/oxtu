@@ -40,37 +40,31 @@
       struct-to-htmlres))
 
 (defn form-struct []
-  ;; reagentが描画するためのDOMが必要
-  [:html
-   [:head]
-   [:body
-    [:div
-     [:div {:id "app"}]
-     [:script {:src "bundle.js" :type "text/javascript"}]]]])
+  [:div {:id "app"}
+   [:script {:src "bundle.js" :type "text/javascript"}]])
 
 (defn form [req]
   (-> (form-struct)
       struct-to-htmlres))
 
 (def handler
-  (br/make-handler ["/" {"" index
-                         "index.html" index
-                         "form.html" form
-                         [:tag] h-tag
-                         [:tag "/"] h-tag}]))
+  (make-handler ["/" {"" index
+                      "index.html" index
+                      "form.html" form
+                      [:tag] h-tag
+                      [:tag "/"] h-tag}]))
 
 (def app
   (-> handler
-      mids/wrap-session
-      midf/wrap-flash
-      (midr/wrap-resource "public")
-      ))
+      wrap-session
+      wrap-flash
+      (wrap-resource "public")))
 
 (defn start-server [& {:keys [host port join?]
                        :or {host "localhost" port 3000 join? false}}]
   (let [port (if (string? port) (Integer/parseInt port) port)]
     (when-not @server
-      (reset! server (s/run-jetty #'app {:host host :port port :join? join?})))))
+      (reset! server (run-jetty #'app {:host host :port port :join? join?})))))
 
 (defn stop-server []
   (when @server

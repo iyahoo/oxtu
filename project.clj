@@ -15,19 +15,13 @@
   :uberjar-name "oxtu.jar"
   :profiles {:uberjar {:aot :all
                        :main oxtu.main}}
-
-  ;; lein cleanでお掃除用の設定
   :clean-targets ^{:protect false}
   [:target-path "resources/public/bundle.js" "resources/public/js/out"]
 
   :cljsbuild {:builds [{:source-paths ["src-cljs"]
                         :compiler {:main "oxtu.cljs.core"
                                    :output-to "resources/public/bundle.js"
-                                   ;; いろいろ細かくわけるやつをここに置く
                                    :output-dir "resources/public/js/out"
-                                   ;; 細かくわけたやつをどういうパスでアクセスするか
-                                   ;; wrap-resourceの設定に合うようにする
-                                   ;; 今回はresources/publicをルートにするようにしたのでこう
                                    :asset-path "/js/out"
                                    :optimizations :none
                                    :pretty-print true}}]})
