@@ -24,4 +24,5 @@
                                    :output-dir "resources/public/js/out"
                                    :asset-path "/js/out"
                                    :optimizations :none
-                                   :pretty-print true}}]})
+                                   :pretty-print true}}]}
+  :hooks [leiningen.cljsbuild])
