@@ -13,13 +13,10 @@
 
 (defonce oxtu "オッ!!!!!!!!!!!!")
 
-(defonce form-html "resources/public/form.html")
-
 (defn oxtu-struct [htag]
   (let [htag (keyword htag)]
-    (as-> oxtu oxtu
-      [:Marquee {:behavior "alternate" :direction "up" :height "50"} oxtu]
-      [htag oxtu])))
+    [htag
+     [:Marquee {:behavior "alternate" :direction "up" :height "50"} oxtu]]))
 
 (defn make-response [strhtml]
   (-> strhtml
