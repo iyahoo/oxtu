@@ -3,6 +3,7 @@
   (:require [ring.middleware.session :refer [wrap-session]]
             [ring.middleware.flash :refer [wrap-flash]]
             [ring.middleware.resource :refer [wrap-resource]]
+            [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.adapter.jetty :refer [run-jetty]]
             [ring.util.response :as res]
             [hiccup.core :as hc :refer [html]]
@@ -40,8 +41,12 @@
       struct-to-htmlres))
 
 (defn form-struct []
-  [:div {:id "app"}
-   [:script {:src "bundle.js" :type "text/javascript"}]])
+  [:html
+   [:head
+    [:link {:rel "stylesheet" :href "/css/style.css"}]]
+   [:body
+    [:div {:id "app"}
+     [:script {:src "bundle.js" :type "text/javascript"}]]]])
 
 (defn form [req]
   (-> (form-struct)
@@ -58,7 +63,8 @@
   (-> handler
       wrap-session
       wrap-flash
-      (wrap-resource "public")))
+      (wrap-resource "public")
+      wrap-content-type))
 
 (defn start-server [& {:keys [host port join?]
                        :or {host "localhost" port 3000 join? false}}]
