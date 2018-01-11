@@ -49,15 +49,16 @@
   (-> (form-struct)
       struct-to-htmlres))
 
-(defn receive-struct []
+(defn receive-struct [req]
   [:html
    [:body
     [:div {:id "app"}
-     [:script {:src "receive.js" :type "text/javascript"}]]]])
+     [:script {:src "receive.js" :type "text/javascript"}]
+     [:h1 (str req)]]]])
 
 (defn receive [req]
-  (-> (receive-struct)
-      struct-to-htmlres))
+  (-> (receive-struct req)
+      (struct-to-htmlres)))
 
 (def handler
   (make-handler ["/" {"" index
