@@ -4,8 +4,10 @@
             [ring.middleware.flash :refer [wrap-flash]]
             [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.content-type :refer [wrap-content-type]]
+            [ring.middleware.format :refer [wrap-restful-format]]
             [ring.adapter.jetty :refer [run-jetty]]
             [ring.util.response :as res]
+            [ring.util.request :refer [body-string]]
             [hiccup.core :as hc :refer [html]]
             [bidi.ring :refer [make-handler]]))
 
@@ -54,7 +56,7 @@
    [:body
     [:div {:id "app"}
      [:script {:src "receive.js" :type "text/javascript"}]
-     [:h1 (str req)]]]])
+     [:h3 (body-string req)]]]])
 
 (defn receive [req]
   (-> (receive-struct req)
@@ -70,6 +72,7 @@
 
 (def app
   (-> handler
+      wrap-restful-format
       wrap-session
       wrap-flash
       (wrap-resource "public")
