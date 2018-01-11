@@ -80,7 +80,9 @@
 
 (defn start-server [& {:keys [host port join?]
                        :or {host "localhost" port 3000 join? false}}]
-  (let [port (if (string? port) (Integer/parseInt port) port)]
+  (let [port (cond (integer? port) port
+                   (string? port) (Integer/parseInt port)
+                   :else 300)]
     (when-not @server
       (reset! server (run-jetty #'app {:host host :port port :join? join?})))))
 
