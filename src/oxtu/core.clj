@@ -82,7 +82,7 @@
                        :or {host "localhost" port 3000 join? false}}]
   (let [port (cond (integer? port) port
                    (string? port) (Integer/parseInt port)
-                   :else 300)]
+                   :else 3000)]
     (when-not @server
       (reset! server (run-jetty #'app {:host host :port port :join? join?})))))
 
