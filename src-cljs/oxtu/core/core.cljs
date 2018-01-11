@@ -11,7 +11,7 @@
    [:canvas {:id "c1" :width 140 :height 100}]
    [:h4 "↑↑↑四角じゃん！！↑↑↑"]
    [:h3 "オッ！！！！"]
-   [:form {:action "/test" :method "post"}
+   [:form {:action "/receive.html" :method "post"}
     [:div
      [:label {:for "name"} "お名前:"]
      [:input {:type "text" :id "name" :name "user_name"}]]

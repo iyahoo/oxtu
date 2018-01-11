@@ -13,8 +13,8 @@
 
 (defonce oxtu "オッ!!!!!!!!!!!!")
 
-(defn oxtu-struct [htag]
-  (let [htag (keyword htag)]
+(defn oxtu-struct [str-htag]
+  (let [htag (keyword str-htag)]
     [htag
      [:Marquee {:behavior "alternate" :direction "up" :height "50"} oxtu]]))
 
@@ -49,10 +49,21 @@
   (-> (form-struct)
       struct-to-htmlres))
 
+(defn receive-struct []
+  [:html
+   [:body
+    [:div {:id "app"}
+     [:script {:src "receiver.js" :type "text/javascript"}]]]])
+
+(defn receive [req]
+  (-> (receive-struct)
+      struct-to-htmlres))
+
 (def handler
   (make-handler ["/" {"" index
                       "index.html" index
                       "form.html" form
+                      "receive.html" receive
                       [:tag] h-tag
                       [:tag "/"] h-tag}]))
 
