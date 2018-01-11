@@ -53,7 +53,7 @@
   [:html
    [:body
     [:div {:id "app"}
-     [:script {:src "receiver.js" :type "text/javascript"}]]]])
+     [:script {:src "receive.js" :type "text/javascript"}]]]])
 
 (defn receive [req]
   (-> (receive-struct)
