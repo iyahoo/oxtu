@@ -11,10 +11,14 @@
                  [ring/ring-jetty-adapter "1.6.3"]
                  [hiccup "1.0.5"]
                  [reagent "0.7.0"]
-                 [bidi "2.1.2"]]
+                 [bidi "2.1.2"]
+                 [cljs-http "0.1.44"]]
   :uberjar-name "oxtu.jar"
   :profiles {:uberjar {:aot :all
-                       :main oxtu.main}}
+                       :main oxtu.main}
+             :dev {:dependencies [[com.cemerick/piggieback "0.2.2"]
+                                  [org.clojure/tools.nrepl "0.2.10"]]
+                   :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}}
   :clean-targets ^{:protect false}
   [:target-path
    "resources/public/bundle.js" "resources/public/js/out"
