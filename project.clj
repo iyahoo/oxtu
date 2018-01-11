@@ -9,6 +9,7 @@
                  [org.clojure/clojurescript "1.9.946"]
                  [ring/ring-core "1.6.3"]
                  [ring/ring-jetty-adapter "1.6.3"]
+                 [ring-middleware-format "0.7.2"]
                  [hiccup "1.0.5"]
                  [reagent "0.7.0"]
                  [bidi "2.1.2"]
