@@ -21,7 +21,7 @@ label {
 
 input, textarea {
     font: 1em sans-serif;
-    
+
     width: 300px;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -30,7 +30,7 @@ input, textarea {
 }
 
 input:focus, textarea:focus {
-    border-color: #000;    
+    border-color: #000;
 }
 
 textarea {
@@ -48,4 +48,3 @@ textarea {
 button {
     margin-left: .5em;
 }
-

@@ -35,7 +35,7 @@
 
 (defn write-rect []
   (let [canv (.getElementById js/document "c1")
-        ctx (.getContext canv "2d")]    
+        ctx (.getContext canv "2d")]
     (.beginPath ctx)
     (. ctx fillRect 10 0 100 100)))
 

@@ -3,86 +3,50 @@
 
 (enable-console-print!)
 
-(defonce app-state (atom {:text "Hello world!"}))
+(defn square [& {:keys [value on-click]}]
+  [:button.square {:onClick #(on-click)}
+   value])
 
-(defn shopping-list [& {:keys [name]}]
-  [:div.shopping-list
-   [:h1 (str "Shopping List for" name)]
-   [:ul
-    [:li "Instagram"]
-    [:li "WhatsApp"]
-    [:li "Oculus"]]])
+(defn board []
+  (let [status "Next player: X"
+        squares (atom [nil nil nil nil nil nil nil nil nil])
+        handle-click (fn [i squares]
+                       (swap! squares assoc i "X"))
+        render-square (fn [i squares]
+                        [square
+                         :value (@squares i)
+                         :on-click #(handle-click i squares)])]
+    [:div
+     [:div.status (str @squares)]
+     [:div.board-row
+      [render-square 0 squares]
+      [render-square 1 squares]
+      [render-square 2 squares]]
+     [:div.board-row
+      [render-square 3 squares]
+      [render-square 4 squares]
+      [render-square 5 squares]]
+     [:div.board-row
+      [render-square 6 squares]
+      [render-square 7 squares]
+      [render-square 8 squares]]]))
 
-;; class Square extends React.Component {
-;;   render() {
-;;     return (
-;;       <button className="square">
-;;         {/* TODO */}
-;;       </button>
-;;     );
-;;   }
-;; }
-
-;; class Board extends React.Component {
-;;   renderSquare(i) {
-;;     return <Square />;
-;;   }
-
-;;   render() {
-;;     const status = 'Next player: X';
-
-;;     return (
-;;       <div>
-;;         <div className="status">{status}</div>
-;;         <div className="board-row">
-;;           {this.renderSquare(0)}
-;;           {this.renderSquare(1)}
-;;           {this.renderSquare(2)}
-;;         </div>
-;;         <div className="board-row">
-;;           {this.renderSquare(3)}
-;;           {this.renderSquare(4)}
-;;           {this.renderSquare(5)}
-;;         </div>
-;;         <div className="board-row">
-;;           {this.renderSquare(6)}
-;;           {this.renderSquare(7)}
-;;           {this.renderSquare(8)}
-;;         </div>
-;;       </div>
-;;     );
-;;   }
-;; }
-
-;; class Game extends React.Component {
-;;   render() {
-;;     return (
-;;       <div className="game">
-;;         <div className="game-board">
-;;           <Board />
-;;         </div>
-;;         <div className="game-info">
-;;           <div>{/* status */}</div>
-;;           <ol>{/* TODO */}</ol>
-;;         </div>
-;;       </div>
-;;     );
-;;   }
-;; }
-
-;; // ========================================
-
-;; ReactDOM.render(
-;;   <Game />,
-;;   document.getElementById('root')
-;; );
-
-(defn text []
-  )
+(defn game []
+  [:div.game
+   [:div.game-board
+    [board]]
+   [:div.game-info
+    [:div
+     ;; status
+     ]
+    [:ol
+     ;; TODO
+     ]]])
 
 (reagent/render-component
- [shopping-list]
+ [game]
  (. js/document (getElementById "app")))
+
 
 (defn on-js-reload []
   ;; optionally touch your app-state to force rerendering depending on

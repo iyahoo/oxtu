@@ -64,6 +64,8 @@
 
 (defn react-tuto-struct [req]
   [:html
+   [:head
+    [:link {:rel "stylesheet" :href "/css/tuto_style.css"}]]
    [:body
     [:div {:id "app"}
      [:script {:src "react-tutorial.js" :type "text/javascript"}]]]])
