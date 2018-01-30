@@ -62,11 +62,22 @@
   (-> (receive-struct req)
       (struct-to-htmlres)))
 
+(defn react-tuto-struct [req]
+  [:html
+   [:body
+    [:div {:id "app"}
+     [:script {:src "react-tutorial.js" :type "text/javascript"}]]]])
+
+(defn react-tuto [req]
+  (-> (react-tuto-struct req)
+      (struct-to-htmlres)))
+
 (def handler
   (make-handler ["/" {"" index
                       "index.html" index
                       "form.html" form
                       "receive.html" receive
+                      "tutorial.html" react-tuto
                       [:tag] h-tag
                       [:tag "/"] h-tag}]))
 

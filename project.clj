@@ -23,7 +23,8 @@
   :clean-targets ^{:protect false}
   [:target-path
    "resources/public/bundle.js" "resources/public/js/out"
-   "resources/public/receive.js" "resources/public/js/out2"]
+   "resources/public/receive.js" "resources/public/js/out2"
+   "resources/public/react-tutorial.js" "resources/public/js/out3"]
 
   :cljsbuild {:builds [{:source-paths ["src-cljs/oxtu/core"]
                         :compiler {:main "oxtu.cljs.core"
@@ -37,6 +38,13 @@
                                    :output-to "resources/public/receive.js"
                                    :output-dir "resources/public/js/out2"
                                    :asset-path "/js/out2"
+                                   :optimizations :none
+                                   :pretty-print true}}
+                       {:source-paths ["src-cljs/oxtu/react-tutorial"]
+                        :compiler {:main "oxtu.cljs.react.tutorial"
+                                   :output-to "resources/public/react-tutorial.js"
+                                   :output-dir "resources/public/js/out3"
+                                   :asset-path "/js/out3"
                                    :optimizations :none
                                    :pretty-print true}}]}
   :hooks [leiningen.cljsbuild])
