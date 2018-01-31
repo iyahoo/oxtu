@@ -3,33 +3,36 @@
 
 (enable-console-print!)
 
+(def squares (atom [nil nil nil nil nil nil nil nil nil]))
+
 (defn square [& {:keys [value on-click]}]
   [:button.square {:onClick #(on-click)}
    value])
 
+(defn handle-click [i]
+  (swap! squares assoc i "X"))
+
+(defn render-square [i]
+  [square
+   :value (@squares i)
+   :on-click #(handle-click i)])
+
 (defn board []
-  (let [status "Next player: X"
-        squares (atom [nil nil nil nil nil nil nil nil nil])
-        handle-click (fn [i squares]
-                       (swap! squares assoc i "X"))
-        render-square (fn [i squares]
-                        [square
-                         :value (@squares i)
-                         :on-click #(handle-click i squares)])]
+  (let [status "Next player: X"]
     [:div
      [:div.status (str @squares)]
      [:div.board-row
-      [render-square 0 squares]
-      [render-square 1 squares]
-      [render-square 2 squares]]
+      [render-square 0]
+      [render-square 1]
+      [render-square 2]]
      [:div.board-row
-      [render-square 3 squares]
-      [render-square 4 squares]
-      [render-square 5 squares]]
+      [render-square 3]
+      [render-square 4]
+      [render-square 5]]
      [:div.board-row
-      [render-square 6 squares]
-      [render-square 7 squares]
-      [render-square 8 squares]]]))
+      [render-square 6]
+      [render-square 7]
+      [render-square 8]]]))
 
 (defn game []
   [:div.game
